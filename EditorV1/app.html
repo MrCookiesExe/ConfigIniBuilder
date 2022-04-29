@@ -171,7 +171,7 @@
             <h3 style="padding: 0;margin: 0;">Consonants</h3>
             <div class="ContainerTT">
                 ?
-                <div class="tooltip" style="left: -160px;">
+                <div class="tooltip" style="left: -160px; top: -50px;">
                     Here is consonants that have "rule", so k=k or k=k,k is redundant<br>
                     Exemples:
                     <div class="anex">
@@ -232,7 +232,7 @@
             <h3 style="padding: 0;margin: 0;">Replace pieces</h3>
             <div class="ContainerTT">
                 ?
-                <div class="tooltip" style="left: -160px;">
+                <div class="tooltip" style="left: -160px; top: -10px;">
                     Replace pieces of a pattern with regex <br>
                     Exemple:
                     <div class="anex">
@@ -247,6 +247,8 @@
                         Possible patterns: a ka <br>
                         Replace: (a|e|i|o|u|n) ka=$1 か <br>
                         Final patterns: a か <br><br>
+                        <img src="IMG/ReplaceP_A.PNG">
+                        <img src="IMG/ReplaceP_B.PNG">
                     </div>
                 </div>
             </div>
@@ -453,6 +455,7 @@
                 ?
                 <div class="tooltip">
                     Transition from a vowel to other
+                    <img src="IMG/v v.PNG">
                     <div class="anex">
                         %V1L%, %V1R%, %V2L% and %V2R%
                     </div>
@@ -466,7 +469,8 @@
             <div class="ContainerTT">
                 ?
                 <div class="tooltip">
-                    a
+                    Transition from a vowel ro silence
+                    <img src="IMG/v-.PNG">
                     <div class="anex">
                         %V2L% and %V2R%
                     </div>
@@ -480,7 +484,8 @@
             <div class="ContainerTT">
                 ?
                 <div class="tooltip">
-                    a
+                    Start CV <br>
+                    <img src="IMG/-cv.PNG">
                     <div class="anex">
                         %C2L%, %C2R%, %V2L% and %V2R%
                     </div>
@@ -490,11 +495,12 @@
         </div>
 
         <div style="display:flex;margin-bottom: 5px;">
-            v c
+            v c 
             <div class="ContainerTT">
                 ?
                 <div class="tooltip">
-                    a
+                    Transition between V/CV and CV <br>
+                    <img src="IMG/v c.PNG">
                     <div class="anex">
                         %C2L%, %C2R%, %V1L% and %V1R%
                     </div>
@@ -515,7 +521,8 @@
             <div class="ContainerTT">
                 ?
                 <div class="tooltip">
-                    a
+                    Middle CV <br>
+                    <img src="IMG/cv.PNG">
                     <div class="anex">
                         %C2L%, %C2R%, %V2L% and %V2R%
                     </div>
@@ -529,7 +536,8 @@
             <div class="ContainerTT">
                 ?
                 <div class="tooltip">
-                    a
+                    Transition continuas with CV <br>
+                    <img src="IMG/vcv.PNG">
                     <div class="anex">
                         %C2L%, %C2R%, %V1L%, %V1R%, %V2L% and %V2R%
                     </div>
@@ -550,7 +558,8 @@
             <div class="ContainerTT">
                 ?
                 <div class="tooltip">
-                    a
+                    Transition of a V C to silence <br>
+                    <img src="IMG/vc-.PNG">
                     <div class="anex">
                         %C2L%, %C2R%, %V2L% and %V2R%
                     </div>
@@ -564,7 +573,8 @@
             <div class="ContainerTT">
                 ?
                 <div class="tooltip">
-                    a
+                    Start of a cluster <br>
+                    <img src="IMG/-cc.PNG">
                     <div class="anex">
                         %C2L%, %C2R%, %C1L% and %C1R%
                     </div>
@@ -578,7 +588,8 @@
             <div class="ContainerTT">
                 ?
                 <div class="tooltip">
-                    a
+                    Transition between C's<br>
+                    <img src="IMG/cc.PNG">
                     <div class="anex">
                         %C2L%, %C2R%, %C1L% and %C1R%
                     </div>
@@ -586,7 +597,6 @@
             </div>
             <div style="display: flex; flex-direction: column;">
                 <input style="margin-bottom: 5px;" type="text" id="cc/pattern">
-                <input type="text" id="cc/vc_exception">
             </div>
         </div>
 
@@ -595,7 +605,8 @@
             <div class="ContainerTT">
                 ?
                 <div class="tooltip">
-                    a
+                    End of a cluster<br>
+                    <img src="IMG/cc-.PNG">
                     <div class="anex">
                         %C2L%, %C2R%, %C1L% and %C1R%
                     </div>
@@ -605,11 +616,32 @@
         </div>
 
         <div style="display:flex;margin-bottom: 5px;">
+            cc exceptions
+            <div class="ContainerTT">
+                ?
+                <div class="tooltip">
+                    By default will be [V C][CC] but here can be [VC-][CC] or others<br>
+                    <img src="IMG/cc_exception.PNG">
+
+                    <div class="anex">
+                        Syntax: [VC-/VC/V-/etc]=[Consonant]/[Consonant]/etc
+                    </div>
+
+                    <div class="anex">
+                        %C2L%, %C2R%, %C1L% and %C1R%
+                    </div>
+                </div>
+            </div>
+            <textarea id="cc/vc_exception" style="height: 100px;"></textarea>
+        </div>
+
+        <div style="display:flex;margin-bottom: 5px;">
             vcc
             <div class="ContainerTT">
                 ?
                 <div class="tooltip">
-                    a
+                    Like VCV but for CC<br>
+                    <img src="IMG/vcc.PNG">
                     <div class="anex">
                         %C2L%, %C2R%, %C1L%, %C1R%, %V1L% and %V1R%
                     </div>
@@ -630,7 +662,8 @@
             <div class="ContainerTT">
                 ?
                 <div class="tooltip">
-                    a
+                    Used when the next CC don't exist (and is true)<br>
+                    <img src="IMG/vc.PNG">
                     <div class="anex">
                         %C1L%, %C1R%, %V1L% and %V1R%
                     </div>
@@ -669,7 +702,8 @@
             <div class="ContainerTT">
                 ?
                 <div class="tooltip">
-                    a
+                    End consonant (only used for ending VCC for now)<br>
+                    <img src="IMG/c-.PNG">
                     <div class="anex">
                         %C2L% and %C2R%
                     </div>
