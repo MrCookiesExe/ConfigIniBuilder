@@ -445,6 +445,7 @@ function saveConf(save = true) {
         element.click();
         
         document.body.removeChild(element);
+        console.clear()
         console.log(out)
     }
 }

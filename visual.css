@@ -2,7 +2,16 @@
 
 body {
     background-color: #646464;
+    margin: 0;
+    padding: 0;
+}
+
+iframe {
+    border: none;
     text-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0px);
 }
 
 body.app {
@@ -82,7 +91,7 @@ button:hover {
     vertical-align: top;
 }
 
-*::placeholder{
+*::placeholder {
     color: #a8a8a8;
 }
 
@@ -122,4 +131,17 @@ button:hover {
     min-width: 300px;
     max-width: 500px;
     z-index: 10;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background: #757575;
+}
+
+::-webkit-scrollbar-track {
+    background: #303030;
 }
