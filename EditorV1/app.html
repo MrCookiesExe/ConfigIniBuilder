@@ -22,10 +22,9 @@
                 <div class="tooltip">
                     Here is the path for the user dictionary
                     <br>
-                    Notes:
                     <div class="anex">
                         The order is: Main (g2p) > VB (the [Replace] in config.ini) > User (dic_file) <br>
-                        If the reference for the path (Global/Plugin/Local) will use the default setting (Plugin)
+                        If the reference for the path (Global/Plugin/Local) don't have a reference path, will use the default setting (Plugin)
                     </div>
                 </div>
             </div>
@@ -47,9 +46,13 @@
                     <br>
                     <div class="anex">
                         The order is: Main (g2p) > VB (the [Replace] in config.ini) > User (dic_file) <br>
-                        If the reference for the path (Global/Plugin/Local) will use the default setting (Global)
+                        If the reference for the path (Global/Plugin/Local) don't have a reference path, will use the default setting (Global) <br> <br>
+                        In resources the value can be: <br>
+                        > g2p_arpabet (English) <br>
+                        > g2p_fr (French) <br>
+                        > g2p_pt (Portuguese) <br>
+                        > g2p_ru (Russian)
                     </div>
-                    *Note: The order is: Main (g2p) > VB (the [Replace] in config.ini) > User (dic_file)
                 </div>
             </div>
             <input type="text" id="settings/g2p">
@@ -171,7 +174,7 @@
             <h3 style="padding: 0;margin: 0;">Consonants</h3>
             <div class="ContainerTT">
                 ?
-                <div class="tooltip" style="left: -160px; top: -50px;">
+                <div class="tooltip" style="left: -160px;">
                     Here is consonants that have "rule", so k=k or k=k,k is redundant<br>
                     Exemples:
                     <div class="anex">
@@ -232,7 +235,7 @@
             <h3 style="padding: 0;margin: 0;">Replace pieces</h3>
             <div class="ContainerTT">
                 ?
-                <div class="tooltip" style="left: -160px; top: -10px;">
+                <div class="tooltip" style="left: -160px;">
                     Replace pieces of a pattern with regex <br>
                     Exemple:
                     <div class="anex">
@@ -597,6 +600,24 @@
             </div>
             <div style="display: flex; flex-direction: column;">
                 <input style="margin-bottom: 5px;" type="text" id="cc/pattern">
+            </div>
+        </div>
+
+        <div style="display:flex;margin-bottom: 5px;">
+            cc F
+            <div class="ContainerTT">
+                ?
+                <div class="tooltip">
+                    Used when the next CC don't exist<br>
+                    Red CC | Cyan CC F <br>
+                    <img src="IMG/cc f.PNG">
+                    <div class="anex">
+                        %C2L%, %C2R%, %C1L% and %C1R%
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: column;">
+                <input style="margin-bottom: 5px;" type="text" id="cc F/pattern">
             </div>
         </div>
 

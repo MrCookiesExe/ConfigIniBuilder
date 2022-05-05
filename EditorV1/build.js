@@ -401,7 +401,7 @@ function saveConf(save = true) {
     config["settings"]["DicCaseSense"] = document.getElementById("settings/DicCaseSense").value
 
 
-    let secs = ["-v", "v", "v v", "v-", "-cv", "v c", "cv", "vcv", "vc-", "-cc", "cc", "cc-", "vcc", "vc", "-c", "c-"]
+    let secs = ["-v", "v", "v v", "v-", "-cv", "v c", "cv", "vcv", "vc-", "-cc", "cc", "cc F", "cc-", "vcc", "vc", "-c", "c-"]
 
     for (let s in secs) {
         config[secs[s]] = {}
