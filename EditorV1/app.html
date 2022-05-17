@@ -7,9 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conf.ini Editor</title>
     <link rel="stylesheet" href="../visual.css">
+    <script src="./build.js">
+        document.getElementById('file').onchange = () => {
+            var file = this.files[0];
+            var reader = new FileReader();
+            reader.onload = function (progressEvent) {
+                Loader(this.result)
+            };
+            reader.readAsText(file);
+        };
+    </script>
 </head>
 
 <body class="app" onload="SetWidth()">
+    <span style="display: none;" id ="execute"></span>
+
     <button class="app" onclick="openConf()">Open</button> &nbsp; <button class="app" onclick="saveConf()">Save</button>
     <input type="file" name="file" id="file" style="display: none;">
     <div>
@@ -24,7 +36,8 @@
                     <br>
                     <div class="anex">
                         The order is: Main (g2p) > VB (the [Replace] in config.ini) > User (dic_file) <br>
-                        If the reference for the path (Global/Plugin/Local) don't have a reference path, will use the default setting (Plugin)
+                        If the reference for the path (Global/Plugin/Local) don't have a reference path, will use the
+                        default setting (Plugin)
                     </div>
                 </div>
             </div>
@@ -46,7 +59,8 @@
                     <br>
                     <div class="anex">
                         The order is: Main (g2p) > VB (the [Replace] in config.ini) > User (dic_file) <br>
-                        If the reference for the path (Global/Plugin/Local) don't have a reference path, will use the default setting (Global) <br> <br>
+                        If the reference for the path (Global/Plugin/Local) don't have a reference path, will use the
+                        default setting (Global) <br> <br>
                         In resources the value can be: <br>
                         > g2p_arpabet (English) <br>
                         > g2p_fr (French) <br>
@@ -498,7 +512,7 @@
         </div>
 
         <div style="display:flex;margin-bottom: 5px;">
-            v c 
+            v c
             <div class="ContainerTT">
                 ?
                 <div class="tooltip">

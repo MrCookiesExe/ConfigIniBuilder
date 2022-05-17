@@ -269,122 +269,137 @@ function ChangeToValues(value) {
     }
 }
 
-
 document.getElementById('file').onchange = function a() {
     var file = this.files[0];
     var reader = new FileReader();
     reader.onload = function (progressEvent) {
-        let ini = {}
-        let lines = this.result.split(/\r?\n/)
-        let sec = ""
-        lines.forEach(line => {
-            if (line.startsWith(";") || line.startsWith("#")) return
-            if (line.startsWith("[")) {
-                line = line.slice(1, -1)
-                ini[line] = {}
-                sec = line
-            } else {
-                let data = line.split("=")
-                ini[sec][data.shift()] = data.join("=")
-            }
-        });
-
-        for (sec in ini) {
-            for (let key in ini[sec]) {
-                if (key == "") continue;
-                let c;
-                switch (ChangeToIds(sec)) {
-                    case "settings":
-                        switch (key) {
-                            case "regex":
-                                document.getElementById(`${ChangeToIds(sec)}/${key}`).value = ini[sec][key].split(",").join("\n")
-                                break;
-                            default:
-                                if (document.getElementById(`${ChangeToIds(sec)}/${key}`) == null)
-                                    break;
-                                let data = ini[sec][key].split(",")
-                                document.getElementById(`${ChangeToIds(sec)}/${key}`).value = data[0]
-                                if (data.length > 1) {
-                                    document.getElementById(`${ChangeToIds(sec)}/${key}/where`).value = ChangeToValues(data[1])
-                                }
-                                break;
-                        }
-                        break;
-                    case "Replace": case "ReplacePieces":
-                        document.getElementById(`${ChangeToIds(sec)}-K`).value = key
-                        document.getElementById(`${ChangeToIds(sec)}-V`).value = ini[sec][key]
-                        document.getElementById(`${ChangeToIds(sec)}-Add`).click()
-                        break;
-                    case "Vowels":
-                        document.getElementById(`${ChangeToIds(sec)}-K`).value = key
-                        document.getElementById(`${ChangeToIds(sec)}-L`).value = ini[sec][key].split(",")[0]
-                        document.getElementById(`${ChangeToIds(sec)}-R`).value = ini[sec][key].split(",")[1]
-                        document.getElementById(`${ChangeToIds(sec)}-Add`).click()
-                        break;
-                    case "Consonants":
-                        c = ini[sec][key].split(",")
-                        let clean = [
-                            "Consonants-L-S",
-                            "Consonants-R-S",
-                            "Consonants-L-M",
-                            "Consonants-R-M",
-                            "Consonants-L-F",
-                            "Consonants-R-F"
-                        ]
-                        clean.forEach(cl => {
-                            document.getElementById(cl).value = ""
-                        })
-                        document.getElementById(`${ChangeToIds(sec)}-K`).value = key
-                        for (let i = 0; i < c.length; i++) {
-                            document.getElementById(clean[i]).value = c[i]
-                        }
-                        document.getElementById(`${ChangeToIds(sec)}-Add`).click()
-                        break;
-                    case "Smart":
-                        document.getElementById(`${ChangeToIds(sec)}-K`).value = key
-                        c = ini[sec][key].split(",")
-                        document.getElementById(`${ChangeToIds(sec)}-D`).value = c.shift()
-                        document.getElementById(`${ChangeToIds(sec)}-C`).value = c.join("\n")
-                        document.getElementById(`${ChangeToIds(sec)}-Add`).click()
-                        break;
-                    case "Time":
-                        if (key == "IsMs") {
-                            document.getElementById(`ConsonantsTime/IsMs`).value = ini[sec][key];
-                            break;
-                        }
-                        document.getElementById(`${ChangeToIds(sec)}-K`).value = key
-                        c = ini[sec][key].split(",")
-                        document.getElementById(`${ChangeToIds(sec)}-Mv`).value = c.shift()
-                        document.getElementById(`${ChangeToIds(sec)}-T`).value = c.shift()
-
-                        c = c[0]
-
-                        let at = ["A", "S", "M", "F"]
-
-                        at.forEach(a => {
-                            if (c.includes(a)) {
-                                document.getElementById(`${ChangeToIds(sec)}-${a}`).checked = true
-                            } else {
-                                document.getElementById(`${ChangeToIds(sec)}-${a}`).checked = false
-                            }
-                        })
-
-                        document.getElementById(`${ChangeToIds(sec)}-Add`).click()
-                        break;
-                    default:
-                        let elem = document.getElementById(`${ChangeToIds(sec)}/${key}`)
-                        if (elem != null)
-                            elem.value = ini[sec][key];
-                        break;
-                }
-            }
-        }
+        Loader(this.result)
     };
     reader.readAsText(file);
 };
+
+document.body.onload = () => {
+
+    if (window.location.search == "") return
+
+    path = 'https://raw.githubusercontent.com/MrCookiesExe/ConfigIniBuilder/main' + window.location.search.substring(6)
+    fetch(path).then(txt => txt.text()).then(text => {
+        Loader(text)
+    })
+}
+
+function Loader(raw) {
+    let ini = {}
+    let lines = raw.split(/\r?\n/)
+    let sec = ""
+    lines.forEach(line => {
+        if (line.startsWith(";") || line.startsWith("#")) return
+        if (line.startsWith("[")) {
+            line = line.slice(1, -1)
+            ini[line] = {}
+            sec = line
+        } else {
+            let data = line.split("=")
+            ini[sec][data.shift()] = data.join("=")
+        }
+    });
+
+    for (sec in ini) {
+        for (let key in ini[sec]) {
+            if (key == "") continue;
+            let c;
+            switch (ChangeToIds(sec)) {
+                case "settings":
+                    switch (key) {
+                        case "regex":
+                            document.getElementById(`${ChangeToIds(sec)}/${key}`).value = ini[sec][key].split(",").join("\n")
+                            break;
+                        default:
+                            if (document.getElementById(`${ChangeToIds(sec)}/${key}`) == null)
+                                break;
+                            let data = ini[sec][key].split(",")
+                            document.getElementById(`${ChangeToIds(sec)}/${key}`).value = data[0]
+                            if (data.length > 1) {
+                                document.getElementById(`${ChangeToIds(sec)}/${key}/where`).value = ChangeToValues(data[1])
+                            }
+                            break;
+                    }
+                    break;
+                case "Replace": case "ReplacePieces":
+                    document.getElementById(`${ChangeToIds(sec)}-K`).value = key
+                    document.getElementById(`${ChangeToIds(sec)}-V`).value = ini[sec][key]
+                    document.getElementById(`${ChangeToIds(sec)}-Add`).click()
+                    break;
+                case "Vowels":
+                    document.getElementById(`${ChangeToIds(sec)}-K`).value = key
+                    document.getElementById(`${ChangeToIds(sec)}-L`).value = ini[sec][key].split(",")[0]
+                    document.getElementById(`${ChangeToIds(sec)}-R`).value = ini[sec][key].split(",")[1]
+                    document.getElementById(`${ChangeToIds(sec)}-Add`).click()
+                    break;
+                case "Consonants":
+                    c = ini[sec][key].split(",")
+                    let clean = [
+                        "Consonants-L-S",
+                        "Consonants-R-S",
+                        "Consonants-L-M",
+                        "Consonants-R-M",
+                        "Consonants-L-F",
+                        "Consonants-R-F"
+                    ]
+                    clean.forEach(cl => {
+                        document.getElementById(cl).value = ""
+                    })
+                    document.getElementById(`${ChangeToIds(sec)}-K`).value = key
+                    for (let i = 0; i < c.length; i++) {
+                        document.getElementById(clean[i]).value = c[i]
+                    }
+                    document.getElementById(`${ChangeToIds(sec)}-Add`).click()
+                    break;
+                case "Smart":
+                    document.getElementById(`${ChangeToIds(sec)}-K`).value = key
+                    c = ini[sec][key].split(",")
+                    document.getElementById(`${ChangeToIds(sec)}-D`).value = c.shift()
+                    document.getElementById(`${ChangeToIds(sec)}-C`).value = c.join("\n")
+                    document.getElementById(`${ChangeToIds(sec)}-Add`).click()
+                    break;
+                case "Time":
+                    if (key == "IsMs") {
+                        document.getElementById(`ConsonantsTime/IsMs`).value = ini[sec][key];
+                        break;
+                    }
+                    document.getElementById(`${ChangeToIds(sec)}-K`).value = key
+                    c = ini[sec][key].split(",")
+                    document.getElementById(`${ChangeToIds(sec)}-Mv`).value = c.shift()
+                    document.getElementById(`${ChangeToIds(sec)}-T`).value = c.shift()
+
+                    c = c[0]
+
+                    let at = ["A", "S", "M", "F"]
+
+                    at.forEach(a => {
+                        if (c.includes(a)) {
+                            document.getElementById(`${ChangeToIds(sec)}-${a}`).checked = true
+                        } else {
+                            document.getElementById(`${ChangeToIds(sec)}-${a}`).checked = false
+                        }
+                    })
+
+                    document.getElementById(`${ChangeToIds(sec)}-Add`).click()
+                    break;
+                default:
+                    let elem = document.getElementById(`${ChangeToIds(sec)}/${key}`)
+                    if (elem != null)
+                        elem.value = ini[sec][key];
+                    break;
+            }
+        }
+    }
+}
+
 function openConf() {
     document.getElementById("file").click()
 }
+
 function saveConf(save = true) {
 
     config["settings"] = {}
@@ -433,17 +448,17 @@ function saveConf(save = true) {
         }
     }
 
-    
+
     if (save) {
         var element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(out));
         element.setAttribute('download', "config.ini");
-        
+
         element.style.display = 'none';
         document.body.appendChild(element);
-        
+
         element.click();
-        
+
         document.body.removeChild(element);
         console.clear()
         console.log(out)
