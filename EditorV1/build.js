@@ -269,16 +269,19 @@ function ChangeToValues(value) {
     }
 }
 
-document.getElementById('file').onchange = function a() {
-    var file = this.files[0];
-    var reader = new FileReader();
-    reader.onload = function (progressEvent) {
-        Loader(this.result)
-    };
-    reader.readAsText(file);
-};
 
-document.body.onload = () => {
+
+window.onload = () => {
+
+    document.getElementById('file').onchange = function a() {
+        if (this.files < 1 || !this) return
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.onload = function (progressEvent) {
+            Loader(this.result)
+        };
+        reader.readAsText(file);
+    };
 
     if (window.location.search == "") return
 
@@ -426,14 +429,14 @@ function saveConf(save = true) {
     secs = ["v c", "vcv", "vcc", "vc", "-c", "c-"]
     for (let s in secs) {
         if (document.getElementById(`${secs[s]}/use`).value != "")
-            config[secs[s]]["use"] = document.getElementById(`${secs[s]}/use`).value
+            config[secs[s]]["use"] = document.getElementById(`${secs[s]}/use`).checked + ""
     }
 
     config["cc"]["vc_exception"] = document.getElementById("cc/vc_exception").value.split("\n").join()
     if (document.getElementById("v/use_always").value != "")
-        config["v"]["use_always"] = document.getElementById("v/use_always").value
+        config["v"]["use_always"] = document.getElementById("v/use_always").checked + ""
     if (config["ConsonantsTime/IsMs"])
-        config["ConsonantsTime"]["IsMs"] = document.getElementById("ConsonantsTime/IsMs").value
+        config["ConsonantsTime"]["IsMs"] = document.getElementById("ConsonantsTime/IsMs").checked + ""
 
     let out = ""
 

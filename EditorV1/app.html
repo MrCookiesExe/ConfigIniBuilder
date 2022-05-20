@@ -20,7 +20,7 @@
 </head>
 
 <body class="app" onload="SetWidth()">
-    <span style="display: none;" id ="execute"></span>
+    <span style="display: none;" id="execute"></span>
 
     <button class="app" onclick="openConf()">Open</button> &nbsp; <button class="app" onclick="saveConf()">Save</button>
     <input type="file" name="file" id="file" style="display: none;">
@@ -87,10 +87,7 @@
                     a and A is diferent for the dictionary?
                 </div>
             </div>
-            <select id="settings/DicCaseSense">
-                <option value="true">True</option>
-                <option selected value="false">False</option>
-            </select>
+            <input type="checkbox" id="settings/DicCaseSense">
         </div>
 
         <div style="display:flex;margin-bottom: 5px;">
@@ -353,10 +350,7 @@
                     The value in time is in ms or ticks?
                 </div>
             </div>
-            <select id="ConsonantsTime/IsMs">
-                <option selected value="true">True</option>
-                <option value="false">False</option>
-            </select>
+            <input type="checkbox" id="ConsonantsTime/IsMs">
         </div>
 
         <div id="Time-" style="display: table; width: 80%; margin-right: auto; margin-left: auto;">
@@ -458,11 +452,7 @@
             </div>
             <div style="display: flex; flex-direction: column;">
                 <input style="margin-bottom: 5px;" type="text" id="v/pattern">
-                <select id="v/use_always">
-                    <option selected value=""></option>
-                    <option value="true">True</option>
-                    <option value="false">False</option>
-                </select>
+                <div>Use? <input type="checkbox" id="v/use_always"></div>
             </div>
         </div>
 
@@ -525,11 +515,7 @@
             </div>
             <div style="display: flex; flex-direction: column;">
                 <input style="margin-bottom: 5px;" type="text" id="v c/pattern">
-                <select id="v c/use">
-                    <option selected value=""></option>
-                    <option value="true">True</option>
-                    <option value="false">False</option>
-                </select>
+                <div>Use? <input type="checkbox" id="v c/use"></div>
             </div>
         </div>
 
@@ -562,11 +548,7 @@
             </div>
             <div style="display: flex; flex-direction: column;">
                 <input style="margin-bottom: 5px;" type="text" id="vcv/pattern">
-                <select id="vcv/use">
-                    <option selected value=""></option>
-                    <option value="true">True</option>
-                    <option value="false">False</option>
-                </select>
+                <div>Use? <input type="checkbox" id="vcv/use"></div>
             </div>
         </div>
 
@@ -684,11 +666,7 @@
             </div>
             <div style="display: flex; flex-direction: column;">
                 <input style="margin-bottom: 5px;" type="text" id="vcc/pattern">
-                <select id="vcc/use">
-                    <option selected value=""></option>
-                    <option value="true">True</option>
-                    <option value="False">False</option>
-                </select>
+                <div>Use? <input type="checkbox" id="vcc/use"></div>
             </div>
         </div>
 
@@ -706,11 +684,7 @@
             </div>
             <div style="display: flex; flex-direction: column;">
                 <input style="margin-bottom: 5px;" type="text" id="vc/pattern">
-                <select id="vc/use">
-                    <option selected value=""></option>
-                    <option value="true">True</option>
-                    <option value="False">False</option>
-                </select>
+                <div>Use? <input type="checkbox" id="vc/use"></div>
             </div>
         </div>
 
@@ -724,11 +698,7 @@
             </div>
             <div style="display: flex; flex-direction: column;">
                 <input style="margin-bottom: 5px;" type="text" id="-c/pattern">
-                <select id="-c/use">
-                    <option selected value=""></option>
-                    <option value="true">True</option>
-                    <option value="False">False</option>
-                </select>
+                <div>Use? <input type="checkbox" id="-c/use"></div>
             </div>
         </div>
 
@@ -746,11 +716,7 @@
             </div>
             <div style="display: flex; flex-direction: column;">
                 <input style="margin-bottom: 5px;" type="text" id="c-/pattern">
-                <select id="c-/use">
-                    <option selected value=""></option>
-                    <option value="true">True</option>
-                    <option value="False">False</option>
-                </select>
+                <div>Use? <input type="checkbox" id="c-/use"></div>
             </div>
         </div>
 
